@@ -1,2 +1,2 @@
 # iresspro-packager
-Packaging IressPro installer from arbitrary combination of subcomponents, versions, etc.
+Packaging/creating IressPro installer from arbitrary combination of subcomponents, versions, etc.
