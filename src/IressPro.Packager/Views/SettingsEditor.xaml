@@ -1,0 +1,207 @@
+﻿<Window x:Class="IressPro.Packager.Views.SettingsEditor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        xmlns:local="clr-namespace:IressPro.Packager.Views"                
+        xmlns:View="clr-namespace:Iress.WPF.View;assembly=Iress.WPF"                 
+        Title="IRESS Packager - Settings" Height="380" Width="840" Icon="/IressPro.Packager;component/Iress.ico" WindowStartupLocation="CenterOwner"
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent">
+  <Window.Resources>
+    <ResourceDictionary >
+      <ResourceDictionary.MergedDictionaries>
+        <!--<ResourceDictionary Source="/Iress.AsLink.WPF;component/AsLink/Theme.Color.Lite.VaporWave.xaml" />
+        <ResourceDictionary Source="/Iress.WPF;component/ColorScheme/Theme.Color.Lite.Gray.xaml" />
+        -->
+        <ResourceDictionary Source="/Iress.WPF;component/Base/DataGrid.Base.xaml" />
+        <ResourceDictionary Source="/Iress.WPF;component/Base/BasicDefaultsLayout.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
+      <Style TargetType="FrameworkElement" >
+        <Setter Property="Control.Margin" Value="8 4" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+      </Style>
+
+    </ResourceDictionary>
+  </Window.Resources>
+  <WindowChrome.WindowChrome>
+    <WindowChrome CaptionHeight="0" ResizeBorderThickness="10" />
+  </WindowChrome.WindowChrome>
+  <Border Style="{StaticResource BorderStyle_Aav0}" >
+
+    <Grid Margin="6" x:Name="ZommablePanel" >
+      <Grid.LayoutTransform>
+        <ScaleTransform ScaleX="{Binding ZV, ElementName=wnd, FallbackValue=1}" ScaleY="{Binding ZV, ElementName=wnd, FallbackValue=1}" />
+      </Grid.LayoutTransform>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5">
+        <Grid>
+          <Image Width="48" Margin="5 0" Source="/IressPro.Packager;component/Iress.ico"/>
+        </Grid>
+        <TextBlock Text="IRESS Packager - Settings" FontSize="26" Foreground="#888" Margin="10" />
+        <Grid>
+          <Ellipse HorizontalAlignment="Center" Width="17" Height="11" RenderTransformOrigin="0.2,0.5" Fill="#FF40E3B7" >
+            <Ellipse.RenderTransform>
+              <RotateTransform Angle="-100"/>
+            </Ellipse.RenderTransform>
+          </Ellipse>
+          <Ellipse HorizontalAlignment="Center" Width="15" Height="10" RenderTransformOrigin="0.25,0.25" Fill="#FF40B7E3" >
+            <Ellipse.RenderTransform>
+              <RotateTransform Angle="-30"/>
+            </Ellipse.RenderTransform>
+          </Ellipse>
+          <Ellipse HorizontalAlignment="Center" Width="17" Height="11" RenderTransformOrigin="0.2,0.5" Fill="Transparent" Stroke="#60ffa7" StrokeThickness=".5">
+            <Ellipse.RenderTransform>
+              <RotateTransform Angle="-100"/>
+            </Ellipse.RenderTransform>
+          </Ellipse>
+        </Grid>
+        <TextBlock Text="" FontSize="14" Foreground="Orange" Margin="10" x:Name="tbkInfo"/>
+      </StackPanel>
+
+      <Border Grid.Row="1" CornerRadius="4" BorderBrush="#4888" Background="#1888" Padding="5" Margin="5" BorderThickness=".5">
+        <ScrollViewer>
+          <Grid >
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="185"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="20"/>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="20"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Content="Settings"  Target="{Binding ElementName=tbxStagingRoot}" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Height="40" Margin="-22,-7,0,-6" Grid.Row="1" FontSize="16" Opacity=".3" >
+              <Label.RenderTransform>
+                <RotateTransform Angle="-90"/>
+              </Label.RenderTransform>
+            </Label>
+
+            <Label     Grid.Row="0" Grid.Column="0" Content="_Local Staging Root Folder"  Target="{Binding ElementName=tbxStagingRoot}" />
+            <TextBox   Grid.Row="0" Grid.Column="1" x:Name="tbxStagingRoot"   Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <Label     Grid.Row="1" Grid.Column="0" Content="_Package Process Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox   Grid.Row="1" Grid.Column="1" x:Name="tbxPkgPrcsFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <Label     Grid.Row="2" Grid.Column="0" Content="_Version Delimiter"          Target="{Binding ElementName=tbxVersionDelimeter}" />
+            <TextBox   Grid.Row="2" Grid.Column="1" x:Name="tbxVersionDelimeter" Text="?" Width="120" HorizontalAlignment="Left" />
+            <CheckBox  Grid.Row="0" Grid.Column="3" x:Name="cbxAutoOpenResults" Content="_Auto Open Results" />
+            <CheckBox  Grid.Row="1" Grid.Column="3" x:Name="cbxAutoCopyToDrivY" Content="_Auto Copy to Y:"   />
+            <CheckBox  Grid.Row="2" Grid.Column="3" x:Name="cbxAutoOpenResul_0" Content="option _3" />
+
+            <Label     Grid.Row="3" Grid.Column="0" Content="Soirce Folders: &#10;                     Iress"     Target="{Binding ElementName=tbxIrsSrcFolder}" />            
+            <Label     Grid.Row="4" Grid.Column="0" Content="IOS+"      Target="{Binding ElementName=tbxIosSrcFolder}" />            
+            <Label     Grid.Row="5" Grid.Column="0" Content="Retail"    Target="{Binding ElementName=tbxRtlSrcFolder}" />            
+            <Label     Grid.Row="6" Grid.Column="0" Content="IPS"       Target="{Binding ElementName=tbxIpsSrcFolder}" />            
+            <Label     Grid.Row="7" Grid.Column="0" Content="Auxiliary" Target="{Binding ElementName=tbxAuxSrcFolder}" />            
+            <Label     Grid.Row="8" Grid.Column="0" Content="Self-cont" Target="{Binding ElementName=tbxSlfSrcFolder}" />
+
+            <TextBox   Grid.Row="3" Grid.Column="1" x:Name="tbxIrsSrcFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" VerticalAlignment="Bottom" Margin="0 3" />
+            <TextBox   Grid.Row="4" Grid.Column="1" x:Name="tbxIosSrcFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <TextBox   Grid.Row="5" Grid.Column="1" x:Name="tbxRtlSrcFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <TextBox   Grid.Row="6" Grid.Column="1" x:Name="tbxIpsSrcFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <TextBox   Grid.Row="7" Grid.Column="1" x:Name="tbxAuxSrcFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <TextBox   Grid.Row="8" Grid.Column="1" x:Name="tbxSlfSrcFolder" Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <!--
+            <Label     Grid.Row="9" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />            <TextBox   Grid.Row="9" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="10" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />            <TextBox  Grid.Row="10" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="11" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />            <TextBox  Grid.Row="11" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="12" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="12" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="13" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="13" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="14" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="14" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="15" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="15" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="16" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="16" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="17" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="17" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="18" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="18" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="19" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="19" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="20" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="20" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="21" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="21" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="22" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="22" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="23" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="23" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="24" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="24" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="25" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="25" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="26" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="26" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="27" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="27" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="28" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="28" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="29" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="29" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="30" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="30" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="31" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="31" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="32" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="32" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="33" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="33" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="34" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="34" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="35" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="35" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="36" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="36" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="37" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="37" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="38" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="38" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="39" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="39" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="40" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="40" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="41" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="41" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+            <Label    Grid.Row="42" Grid.Column="0" Content="Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
+            <TextBox  Grid.Row="42" Grid.Column="1" Text="C:\IressSetup\????????" Grid.ColumnSpan="1"  />
+
+
+            <TextBlock Grid.RowSpan="2" Grid.Column="4" Text="POC only&#10;More settings to come here ...&#10;... or into a separate popup" Margin="10,-6,10,-4" FontSize="16" Foreground="#8888" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform Angle="-11.283"/>
+                <TranslateTransform/>
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>-->
+
+          </Grid>
+        </ScrollViewer>
+      </Border>
+
+      <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+        <TextBlock Text="Ver 0.10" VerticalAlignment="Top" Foreground="#8888" Margin="20 1" x:Name="tbkVer" />
+        <Button Content=" OK "     Width="80" IsDefault="True" Click="onSaveAndClose" VerticalAlignment="Top" Margin="10 -5 -5 10" Foreground="#080" BorderBrush="Transparent" ToolTip="Save and Close the window" />
+        <Button Content=" X " IsCancel="True" VerticalAlignment="Top" Margin="10 -5 -5 10" Foreground="#d21" BorderBrush="Transparent" ToolTip="Close without saving" />
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

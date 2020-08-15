@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>%24/C/Iress/IressPro.Packager</SccProjectName>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccAuxPath>https://dev.azure.com/alexpi</SccAuxPath>
+    <SccLocalPath>.</SccLocalPath>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>shapes.ico</ApplicationIcon>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>DevKey.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>   
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Iress.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Iress.Sys\Iress.Sys.csproj" />
+    <ProjectReference Include="..\Iress.WPF\Iress.WPF.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Iress.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>
