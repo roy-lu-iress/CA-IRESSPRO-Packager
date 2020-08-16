@@ -74,5 +74,7 @@ namespace IressPro.Packager.Views
       ((TextBox)s).BorderBrush = new SolidColorBrush(Directory.Exists(((TextBox)s).Text) ? Colors.Transparent : Colors.OrangeRed);
       ((TextBox)s).ToolTip = Directory.Exists(((TextBox)s).Text) ? "" : "Folder does not exist.\nDoubleclick to create";
     }
+
+    void onSetDefaults(object sender, RoutedEventArgs e) => MessageBox.Show("This feature is under construction", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information);
   }
 }

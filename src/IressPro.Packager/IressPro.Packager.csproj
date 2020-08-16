@@ -22,6 +22,7 @@
     <DefineConstants>LogErrors</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\CA-Canada-Flag-icon.png" />
     <None Remove="Iress.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,7 @@
     <ProjectReference Include="..\Iress.WPF\Iress.WPF.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\CA-Canada-Flag-icon.png" />
     <Resource Include="Iress.ico" />
   </ItemGroup>
   <ItemGroup>

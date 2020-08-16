@@ -26,7 +26,7 @@ namespace IressPro.Packager
 
       Loaded += (s, e) =>
       {
-        for (var i = 99; i > 0 && (!(
+        for (var i = 9; i > 0 && (!(
           Directory.Exists(_appStg.IrsSrcFolder) &&
           Directory.Exists(_appStg.IosSrcFolder) &&
           Directory.Exists(_appStg.RtlSrcFolder) &&

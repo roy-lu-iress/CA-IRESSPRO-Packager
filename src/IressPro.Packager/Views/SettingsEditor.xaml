@@ -94,11 +94,11 @@
             <Label     Grid.Row="0" Grid.Column="0" Content="_Local Staging Root Folder"  Target="{Binding ElementName=tbxStagingRoot}" />
             <Label     Grid.Row="1" Grid.Column="0" Content="_Package Process Folder"     Target="{Binding ElementName=tbxPkgPrcsFolder}" />
             <Label     Grid.Row="2" Grid.Column="0" Content="_Version Delimiter"          Target="{Binding ElementName=tbxVersionDelimeter}" />
-            <Label     Grid.Row="3" Grid.Column="0" Content="_Source Folders: &#10;                     Iress"     Target="{Binding ElementName=tbxIrsSrcFolder}" />            
-            <Label     Grid.Row="4" Grid.Column="0" Content="_IOS+"                       Target="{Binding ElementName=tbxIosSrcFolder}" />            
-            <Label     Grid.Row="5" Grid.Column="0" Content="_Retail"                     Target="{Binding ElementName=tbxRtlSrcFolder}" />            
-            <Label     Grid.Row="6" Grid.Column="0" Content="_IPS"                        Target="{Binding ElementName=tbxIpsSrcFolder}" />            
-            <Label     Grid.Row="7" Grid.Column="0" Content="_Registry"                   Target="{Binding ElementName=tbxAuxSrcFolder}" />            
+            <Label     Grid.Row="3" Grid.Column="0" Content="_Source Folders: &#10;                     Iress"     Target="{Binding ElementName=tbxIrsSrcFolder}" />
+            <Label     Grid.Row="4" Grid.Column="0" Content="_IOS+"                       Target="{Binding ElementName=tbxIosSrcFolder}" />
+            <Label     Grid.Row="5" Grid.Column="0" Content="_Retail"                     Target="{Binding ElementName=tbxRtlSrcFolder}" />
+            <Label     Grid.Row="6" Grid.Column="0" Content="_IPS"                        Target="{Binding ElementName=tbxIpsSrcFolder}" />
+            <Label     Grid.Row="7" Grid.Column="0" Content="_Registry"                   Target="{Binding ElementName=tbxAuxSrcFolder}" />
             <Label     Grid.Row="8" Grid.Column="0" Content="S_elf-cont"                  Target="{Binding ElementName=tbxSlfSrcFolder}" />
 
             <TextBox   Grid.Row="0" Grid.Column="1" x:Name="tbxStagingRoot"   Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
@@ -198,10 +198,35 @@
         </ScrollViewer>
       </Border>
 
-      <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+      <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 -5 -5 0">
         <TextBlock Text="Ver 0.10" VerticalAlignment="Top" Foreground="#8888" Margin="20 1" x:Name="tbkVer" />
-        <Button Content=" OK "     Width="80" IsDefault="True" Click="onSaveAndClose" VerticalAlignment="Top" Margin="10 -5 -5 10" Foreground="#080" BorderBrush="Transparent" ToolTip="Save and Close the window" />
-        <Button Content=" X " IsCancel="True" VerticalAlignment="Top" Margin="10 -5 -5 10" Foreground="#d21" BorderBrush="Transparent" ToolTip="Close without saving" />
+        <Menu Background="Transparent" x:Name="menu1" VerticalAlignment="Top" Margin="0 0">
+          <MenuItem Header="Reset to Defaults..." ToolTip="Some presets to use" Height="25" >
+            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+              </MenuItem.Icon>
+            </MenuItem>
+          </MenuItem>
+        </Menu>
+
+        <Button Content=" OK "     Width="80" IsDefault="True" Click="onSaveAndClose" VerticalAlignment="Top" Margin="0" Foreground="#080" BorderBrush="Transparent" ToolTip="Save and Close the window" />
+        <Button Content=" X " IsCancel="True" VerticalAlignment="Top" Margin="0" Foreground="#d21" BorderBrush="Transparent" ToolTip="Close without saving" />
       </StackPanel>
     </Grid>
   </Border>
