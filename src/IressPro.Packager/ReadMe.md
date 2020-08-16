@@ -1,4 +1,5 @@
-﻿Tags: .net core publish deploy package cert
+﻿#Misc Publish-related Notes
+Tags: .net core publish deploy package cert
 
 For publish/deployment options of .NET Core apps: MSIX is ClickOnce replacement: 
   https://youtu.be/ZysDhWTZoO0?t=835 (MsVS channel, episode "Modernizing Desktop Apps Part 1" - Feb 28, 2019)
@@ -21,14 +22,17 @@ A fix for   Assets file 'project.assets.json' doesn't have a target for '.NETCor
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>    <======================================
   </PropertyGroup>
   
-#May 19, 2020# - MSIX only
+#May 19, 2020 - MSIX only
   Let's try to publish the stuff from the VS SLN and make staff use proper stuff by going to file:///F:/[your ID]/Installers/MSIX/IressPro.Packager/index.html
   ...and use other means as a fall-back only!!!
   
-#Jun 05, 2020#
+#Jun 05, 2020
   Increased timeouts to 10 min.
   Added timeout to loggings.
   Published to the installer only (see May 19 comment).
 
-#Aug 15, 2020#
+#Aug 15, 2020
   Moved to a new home: https://github.com/oneiress/iresspro-packager
+
+#Aug 16, 2020
+  Removed redundant bits; added optional rudimentary logging.

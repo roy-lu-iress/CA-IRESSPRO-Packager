@@ -3,6 +3,7 @@ using Iress.WPF.Helpers;
 using IressPro.Packager.AppSettings;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,6 +17,13 @@ namespace IressPro.Packager
     {
       base.OnStartup(e);
 
+#if LogErrors
+      var logFolder = @"Logs";
+      if (!Directory.Exists(logFolder)) 
+        Directory.CreateDirectory(logFolder);
+
+      Trace.Listeners.Add(new TextWriterTraceListener(@$"{logFolder}\ErrorLog.{DateTime.Now:yyyy-MM-dd.HHmm}.txt"));
+#endif
       Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
       EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler((s, re) => { (s as TextBox)?.SelectAll(); }));
 

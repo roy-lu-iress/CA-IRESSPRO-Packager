@@ -18,6 +18,9 @@
     <AssemblyOriginatorKeyFile>DevKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>   
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>LogErrors</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Iress.ico" />
   </ItemGroup>
