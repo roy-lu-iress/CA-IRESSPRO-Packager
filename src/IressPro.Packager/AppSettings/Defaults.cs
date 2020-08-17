@@ -2,9 +2,11 @@
 {
   public class Defaults
   {
-    public SourceFolders? Toronto { get; set; }
-    public SourceFolders? Office2 { get; set; }
-    public SourceFolders? Office3 { get; set; }
-    public SourceFolders? Office4 { get; set; }
+    public SourceFolders? AUS { get; set; }
+    public SourceFolders? CAN { get; set; }
+    public SourceFolders? NZL { get; set; }
+    public SourceFolders? SGP { get; set; }
+    public SourceFolders? RSA { get; set; }
+    public SourceFolders? GBR { get; set; }
   }
 }

@@ -20,7 +20,7 @@ namespace IressPro.Packager.Views
 
       _appStg = appStg;
       _defaults = defaults;
-    
+
       MouseLeftButtonDown += (s, e) => DragMove();
 
       tbkInfo.Text = info;
@@ -38,7 +38,6 @@ namespace IressPro.Packager.Views
       tbxIpsSrcFolder.Text           /**/ = _appStg.IpsSrcFolder;
       tbxAuxSrcFolder.Text           /**/ = _appStg.AuxSrcFolder;
       tbxSlfSrcFolder.Text           /**/ = _appStg.SlfSrcFolder;
-
     }
 
     void onSaveAndClose(object sender, RoutedEventArgs e)
@@ -77,6 +76,26 @@ namespace IressPro.Packager.Views
       ((TextBox)s).ToolTip = Directory.Exists(((TextBox)s).Text) ? "" : "Folder does not exist.\nDoubleclick to create";
     }
 
-    void onSetDefaults(object sender, RoutedEventArgs e) => MessageBox.Show($"This feature is currently under construction:\n\n{_defaults.Toronto}", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information);
+    void onSetDefaults(object s, RoutedEventArgs e)
+    {
+      SourceFolders? src;
+      switch (((MenuItem)s).Tag)
+      {
+        case "AUS": src = _defaults?.AUS; break;
+        case "CAN": src = _defaults?.CAN; break;
+        case "NZL": src = _defaults?.NZL; break;
+        case "SGP": src = _defaults?.SGP; break;
+        case "RSA": src = _defaults?.RSA; break;
+        case "GBR": src = _defaults?.GBR; break;
+        default: src = _defaults?.CAN; MessageBox.Show($"This feature is currently under construction:\n\n{((MenuItem)s).Tag}\n\nUse on your own risk", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information); break;
+      }
+
+      tbxIrsSrcFolder.Text = src?.IrsSrcFolder;
+      tbxIosSrcFolder.Text = src?.IosSrcFolder;
+      tbxRtlSrcFolder.Text = src?.RtlSrcFolder;
+      tbxIpsSrcFolder.Text = src?.IpsSrcFolder;
+      tbxAuxSrcFolder.Text = src?.AuxSrcFolder;
+      tbxSlfSrcFolder.Text = src?.SlfSrcFolder;
+    }
   }
 }
