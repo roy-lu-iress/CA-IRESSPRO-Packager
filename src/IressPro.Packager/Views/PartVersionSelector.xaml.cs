@@ -35,7 +35,7 @@ namespace IressPro.Packager
           Directory.Exists(_appStg.SlfSrcFolder))); i--)
         {
           Trace.WriteLine($"{DateTimeOffset.Now:yy.MM.dd HH:mm:ss.f}  onShowSettings()");
-          var se = new SettingsEditor(_appStg, $"Only  {i}  attempts left") { Owner = WpfUtils.FindParentWindow(this) };
+          var se = new SettingsEditor(_appStg, $"Only  {i}  attempts left", new Defaults()) { Owner = WpfUtils.FindParentWindow(this) };
           se.ShowDialog();
         }
 

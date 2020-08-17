@@ -12,13 +12,14 @@ namespace IressPro.Packager
   public partial class MainWindowIP : Iress.WPF.Base.WindowBase
   {
     readonly AppStg _appStg;
+    private readonly Defaults _defaults;
     bool _isLoaded = false;
 
-    public MainWindowIP(AppStg appStg)
+    public MainWindowIP(AppStg appStg, Defaults defaults)
     {
       InitializeComponent();
       _appStg = appStg;
-
+      _defaults = defaults;
       Loaded += /*async */(s, e) =>
       {
         tbkVer.Text = VerHelper.CurVerStr("Core3");        //await Task.Delay(750).ConfigureAwait(false);
@@ -39,7 +40,7 @@ namespace IressPro.Packager
     void onShowSettings(object s, RoutedEventArgs e)
     {
       Trace.WriteLine($"{DateTimeOffset.Now:yy.MM.dd HH:mm:ss.f}  onShowSettings()");
-      var se = new SettingsEditor(_appStg, " ") { Owner = this };
+      var se = new SettingsEditor(_appStg, " ", _defaults) { Owner = this };
       se.ShowDialog();
     }
     void onChkd1(object sender, RoutedEventArgs e)

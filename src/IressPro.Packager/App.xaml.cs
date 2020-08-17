@@ -1,6 +1,7 @@
 ﻿using Iress.Sys.Helpers;
 using Iress.WPF.Helpers;
 using IressPro.Packager.AppSettings;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -19,7 +20,7 @@ namespace IressPro.Packager
 
 #if LogErrors
       var logFolder = @"Logs";
-      if (!Directory.Exists(logFolder)) 
+      if (!Directory.Exists(logFolder))
         Directory.CreateDirectory(logFolder);
 
       Trace.Listeners.Add(new TextWriterTraceListener(@$"{logFolder}\ErrorLog.{DateTime.Now:yyyy-MM-dd.HHmm}.txt"));
@@ -27,7 +28,25 @@ namespace IressPro.Packager
       Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
       EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler((s, re) => { (s as TextBox)?.SelectAll(); }));
 
-      new MainWindowIP(AppStg.Instance).Show();
+      var builder = new ConfigurationBuilder();
+      builder.SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables();
+
+      var cfg = builder.Build();
+      var defaults = cfg.GetSection("Defaults").Get<Defaults>();
+
+#if AltLoggerIsUp
+      Log.Logger = new LoggerConfiguration()
+        .ReadFrom.Configuration(cfg)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .CreateLogger();
+      Log.Logger.Information($"────   App starting   {new string('─', 128)}\n".Substring(0, 140));
+#endif
+
+      new MainWindowIP(AppStg.Instance, defaults).Show();
       Trace.WriteLine($"{DateTimeOffset.Now:yy.MM.dd HH:mm:ss.f} +{(DateTimeOffset.Now - Started):mm\\:ss\\.ff}    {VerHelper.CurVerStr("Core3")}  ");
     }
 

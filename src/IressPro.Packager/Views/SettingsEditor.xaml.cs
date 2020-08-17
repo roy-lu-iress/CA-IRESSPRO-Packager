@@ -12,16 +12,18 @@ namespace IressPro.Packager.Views
   public partial class SettingsEditor : Window
   {
     readonly AppStg _appStg;
+    readonly Defaults _defaults;
 
-    public SettingsEditor(AppStg appStg, string v)
+    public SettingsEditor(AppStg appStg, string info, Defaults defaults)
     {
       InitializeComponent();
 
       _appStg = appStg;
-
+      _defaults = defaults;
+    
       MouseLeftButtonDown += (s, e) => DragMove();
 
-      tbkInfo.Text = v;
+      tbkInfo.Text = info;
       tbkVer.Text = VerHelper.CurVerStr("Core3");
 
       tbxStagingRoot.Text           /**/ = _appStg.StagingRoot;
@@ -75,6 +77,6 @@ namespace IressPro.Packager.Views
       ((TextBox)s).ToolTip = Directory.Exists(((TextBox)s).Text) ? "" : "Folder does not exist.\nDoubleclick to create";
     }
 
-    void onSetDefaults(object sender, RoutedEventArgs e) => MessageBox.Show("This feature is under construction", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information);
+    void onSetDefaults(object sender, RoutedEventArgs e) => MessageBox.Show($"This feature is currently under construction:\n\n{_defaults.Toronto}", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information);
   }
 }
