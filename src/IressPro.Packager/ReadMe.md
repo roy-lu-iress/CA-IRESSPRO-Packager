@@ -36,3 +36,13 @@ A fix for   Assets file 'project.assets.json' doesn't have a target for '.NETCor
 
 #Aug 16, 2020
   Removed redundant bits; added optional rudimentary logging.
+
+#Aug 17, 2020 - Scheduling for Australia, Singapore, Canada. 
+███ signifies an overlap of waking hours (assuming people sleep between 23:00 and 7:00)
+
+AUS      1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+AUS    SSSSSSSSSSSSSSSSSS---      ██████                        ████████████---SSSSSSSSSSSSSSSSSS---      ██████                        ████████████---
+SGP     23 24  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22
+SGP       ---SSSSSSSSSSSSSSSSSS---██████                        ████████████      ---SSSSSSSSSSSSSSSSSS---██████                        ████████████
+CAN     13 14 15 16 17 18 19 20 21 22 23 24  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  1  2  3  4  5  6  7  8  9 10 11 12
+CAN                               ██████---SSSSSSSSSSSSSSSSSS---████████████                              ██████---SSSSSSSSSSSSSSSSSS---████████████

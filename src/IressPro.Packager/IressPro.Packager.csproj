@@ -22,6 +22,13 @@
     <DefineConstants>LogErrors</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\33px-Flag_of_Australia.png" />
+    <None Remove="Assets\33px-Flag_of_Canada.png" />
+    <None Remove="Assets\33px-Flag_of_New_Zealand.webp" />
+    <None Remove="Assets\33px-Flag_of_Singapore.png" />
+    <None Remove="Assets\33px-Flag_of_Singapore.webp" />
+    <None Remove="Assets\33px-Flag_of_South_Africa.webp" />
+    <None Remove="Assets\33px-Flag_of_the_United_Kingdom.webp" />
     <None Remove="Assets\CA-Canada-Flag-icon.png" />
     <None Remove="Iress.ico" />
   </ItemGroup>
@@ -37,6 +44,13 @@
     <ProjectReference Include="..\Iress.WPF\Iress.WPF.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\33px-Flag_of_Australia.png" />
+    <Resource Include="Assets\33px-Flag_of_Canada.png" />
+    <Resource Include="Assets\33px-Flag_of_New_Zealand.webp" />
+    <Resource Include="Assets\33px-Flag_of_Singapore.png" />
+    <Resource Include="Assets\33px-Flag_of_Singapore.webp" />
+    <Resource Include="Assets\33px-Flag_of_South_Africa.webp" />
+    <Resource Include="Assets\33px-Flag_of_the_United_Kingdom.webp" />
     <Resource Include="Assets\CA-Canada-Flag-icon.png" />
     <Resource Include="Iress.ico" />
   </ItemGroup>

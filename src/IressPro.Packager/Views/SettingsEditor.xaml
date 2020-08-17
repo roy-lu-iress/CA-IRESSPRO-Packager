@@ -202,24 +202,34 @@
         <TextBlock Text="Ver 0.10" VerticalAlignment="Top" Foreground="#8888" Margin="20 1" x:Name="tbkVer" />
         <Menu Background="Transparent" x:Name="menu1" VerticalAlignment="Top" Margin="0 0">
           <MenuItem Header="Reset to Defaults..." ToolTip="Some presets to use" Height="25" >
-            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+            <MenuItem Header="_Australia" ToolTip="Australia office"  Click="onSetDefaults" >
               <MenuItem.Icon>
-                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+                <Image Source="/Assets/33px-Flag_of_Australia.png"/>
               </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
               <MenuItem.Icon>
-                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+                <Image Source="/Assets/33px-Flag_of_Canada.png"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+            <MenuItem Header="_New Zealand" ToolTip="New Zealand office"  Click="onSetDefaults" >
               <MenuItem.Icon>
-                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+                <Image Source="/Assets/33px-Flag_of_New_Zealand.webp"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="_Canada" ToolTip="Toronto office"  Click="onSetDefaults" >
+            <MenuItem Header="_Singapore and Asia" ToolTip="Singapore and Asia office"  Click="onSetDefaults" >
               <MenuItem.Icon>
-                <Image Source="/Assets/CA-Canada-Flag-icon.png"/>
+                <Image Source="/Assets/33px-Flag_of_Singapore.png"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_South Africa" ToolTip="South Africa office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/33px-Flag_of_South_Africa.webp"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_United Kingdom" ToolTip="United Kingdom office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/33px-Flag_of_the_United_Kingdom.webp"/>
               </MenuItem.Icon>
             </MenuItem>
           </MenuItem>
