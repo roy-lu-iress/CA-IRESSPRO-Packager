@@ -73,11 +73,11 @@
       
       <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 -4 0 0">
         <Menu Background="Transparent" x:Name="menu1" VerticalAlignment="Stretch" Margin="0 0 0 4">
-          <MenuItem Header="Target _Fodlers"             ToolTip="Open Exolorer at the target folder"  Click="onExplorerTargetFolders" Width="100" Background="Transparent" BorderThickness="0" />
+          <MenuItem Header="Target _Folders"             ToolTip="Open Exolorer at the target folder"  Click="onExplorerTargetFolders" Width="100" Background="Transparent" BorderThickness="0" />
           <MenuItem IsCheckable="True" x:Name="mnuAutoOpenResults2" Header="Auto _Open Results" Checked="onChkd2" Unchecked="onChkd2" Width="125" Background="Transparent" BorderThickness="0" />
           <MenuItem IsCheckable="True" x:Name="mnuAutoCopyToDrivY2" Header="Auto _Copy to Y:  " Checked="onChkd2" Unchecked="onChkd2" Width="125" Background="Transparent" BorderThickness="0" />
           <MenuItem Header="° ° °" ToolTip="Click to adjust file locations and other settings" Height="30" Padding="10 10 10 4">
-            <MenuItem Header="_Explore Target Fodlers" ToolTip="Open Exolorer at the target folder"  Click="onExplorerTargetFolders" />
+            <MenuItem Header="_Explore Target Folders" ToolTip="Open Exolorer at the target folder"  Click="onExplorerTargetFolders" />
             <MenuItem Header="_Settings" ToolTip="Click to adjust file locations and other settings" Click="onShowSettings" />
             <Separator />
             <MenuItem IsCheckable="True" x:Name="mnuAutoOpenResults1" Header="Auto _Open Results" Checked="onChkd1" Unchecked="onChkd1" />
