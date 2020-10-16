@@ -8,5 +8,6 @@
     public SourceFolders? SGP { get; set; }
     public SourceFolders? RSA { get; set; }
     public SourceFolders? GBR { get; set; }
+    public SourceFolders? EXP { get; set; }
   }
 }

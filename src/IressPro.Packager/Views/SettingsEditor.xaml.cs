@@ -54,6 +54,8 @@ namespace IressPro.Packager.Views
       _appStg.IpsSrcFolder           /**/ = tbxIpsSrcFolder.Text                   /**/ ;
       _appStg.AuxSrcFolder           /**/ = tbxAuxSrcFolder.Text                   /**/ ;
       _appStg.SlfSrcFolder           /**/ = tbxSlfSrcFolder.Text                   /**/ ;
+      
+      _appStg.Save();
 
       Close();
     }
@@ -87,6 +89,7 @@ namespace IressPro.Packager.Views
         case "SGP": src = _defaults?.SGP; break;
         case "RSA": src = _defaults?.RSA; break;
         case "GBR": src = _defaults?.GBR; break;
+        case "exp": src = _defaults?.EXP; break;
         default: src = _defaults?.CAN; MessageBox.Show($"This feature is currently under construction:\n\n{((MenuItem)s).Tag}\n\nUse on your own risk", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information); break;
       }
 
