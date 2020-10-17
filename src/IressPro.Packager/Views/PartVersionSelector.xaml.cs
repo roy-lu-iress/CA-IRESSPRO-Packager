@@ -154,14 +154,14 @@ namespace IressPro.Packager
 #else
         tbkPkgFilename.Text = $"{a1}{a2}{a3}{a4}{a5}".Trim(new[] { '-' }) + ".exe";
 #endif
-
+        const string installer = "Setup.exe";
         tbkInfo.Text = "";
-        if (chk1.IsChecked == true && lbx1?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IrsSrcFolder, "Setup.exe"))) tbkInfo.Text += $"Warning: No  'Setup.exe'  in  '{IrsSrcFolder}' \n"; }
-        if (chk2.IsChecked == true && lbx2?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IosSrcFolder, "Setup.exe"))) tbkInfo.Text += $"Warning: No  'Setup.exe'  in  '{IosSrcFolder}' \n"; }
-        if (chk3.IsChecked == true && lbx3?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(RtlSrcFolder, "Setup.exe"))) tbkInfo.Text += $"Warning: No  'Setup.exe'  in  '{RtlSrcFolder}' \n"; }
-        if (chk4.IsChecked == true && lbx4?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IpsSrcFolder, "Setup.exe"))) tbkInfo.Text += $"Warning: No  'Setup.exe'  in  '{IpsSrcFolder}' \n"; }
-        if (chk5.IsChecked == true && lbx5?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(CibSrcFolder, "Setup.exe"))) tbkInfo.Text += $"Warning: No  'Setup.exe'  in  '{CibSrcFolder}' \n"; }
-        if (chkZ.IsChecked == true && lbxZ?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(CibSrcFolder, "Setup.exe"))) tbkInfo.Text += $"Warning: No  'Setup.exe'  in  '{CibSrcFolder}' \n"; }
+        if (chk1.IsChecked == true && lbx1?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IrsSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{IrsSrcFolder}' \n"; }
+        if (chk2.IsChecked == true && lbx2?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IosSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{IosSrcFolder}' \n"; }
+        if (chk3.IsChecked == true && lbx3?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(RtlSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{RtlSrcFolder}' \n"; }
+        if (chk4.IsChecked == true && lbx4?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IpsSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{IpsSrcFolder}' \n"; }
+        if (chk5.IsChecked == true && lbx5?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(CibSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{CibSrcFolder}' \n"; }
+        if (chkZ.IsChecked == true && lbxZ?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(CibSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{CibSrcFolder}' \n"; }
 
         btnCreatePkg.IsEnabled = (lbx1?.SelectedIndex >= 0 && lbx2?.SelectedIndex >= 0) || lbxZ?.SelectedIndex >= 0;
 

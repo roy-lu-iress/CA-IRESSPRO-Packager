@@ -1,6 +1,7 @@
 ﻿using Iress.Sys.Helpers;
 using IressPro.Packager.AppSettings;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,8 +55,11 @@ namespace IressPro.Packager.Views
       _appStg.IpsSrcFolder           /**/ = tbxIpsSrcFolder.Text                   /**/ ;
       _appStg.AuxSrcFolder           /**/ = tbxAuxSrcFolder.Text                   /**/ ;
       _appStg.SlfSrcFolder           /**/ = tbxSlfSrcFolder.Text                   /**/ ;
-      
+
       _appStg.Save();
+
+      Process.Start(new ProcessStartInfo { FileName = System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(".dll", ".exe", StringComparison.OrdinalIgnoreCase) }); // temp poor man's reload.
+      App.Current.Shutdown();
 
       Close();
     }
@@ -90,6 +94,7 @@ namespace IressPro.Packager.Views
         case "RSA": src = _defaults?.RSA; break;
         case "GBR": src = _defaults?.GBR; break;
         case "exp": src = _defaults?.EXP; break;
+        case "DEV": src = _defaults?.DEV; break;
         default: src = _defaults?.CAN; MessageBox.Show($"This feature is currently under construction:\n\n{((MenuItem)s).Tag}\n\nUse on your own risk", "Hello!", MessageBoxButton.OK, MessageBoxImage.Information); break;
       }
 

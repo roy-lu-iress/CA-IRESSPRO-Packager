@@ -14,7 +14,12 @@
     public string AutoRunFilename { get; set; } = "IressCanadaInstall.bat";
 
     public string StagingRoot { get; set; } = StagingRootConst;
+
+#if DEBUG
+    public string PackageProcessFolder { get; set; } = @"C:\Packager.Sources\PackageProcess\";
+#else
     public string PackageProcessFolder { get; set; } = @"Y:\Production Packages\Client\IressCanada\PackageProcess\";
+#endif
     public string TargetBetaRetailFolderY { get; set; } = @"Y:\Production Packages\Client\IressCanada\Beta\Retail\19.2\";
     public string TargetFinalIressFolderY { get; set; } = @"Y:\Production Packages\Client\IressCanada\Final\Iress\19.2\";
 #if BEFORE_Jan15

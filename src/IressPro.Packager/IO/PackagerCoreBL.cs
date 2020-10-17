@@ -136,7 +136,7 @@ namespace IressPro.Packager.IO
       {
         if (sourceFolder != null)
         {
-          var args = $"\"{sourceFolder.Trim(folderEndings)}\" \"{Path.Combine(stgDir, _appStg.StagingSubfolders[i])}\"  {wildcards(i)} /XO /NJH /NJS"; //todo: for non-setup.exe installers - need more wits in the Autorun.bat area.
+          var args = $"\"{sourceFolder.Trim(folderEndings)}\" \"{Path.Combine(stgDir, _appStg.StagingSubfolders[i])}\"  {wildcards(i)} /XO /NJH /NJS"; //todo: for non-SETUP.EXE installers - need more wits in the Autorun.bat area.
           await ProcessExt.ExecuteAsync(_appStg.Robocopy, args).ConfigureAwait(false);
         }
         i++;

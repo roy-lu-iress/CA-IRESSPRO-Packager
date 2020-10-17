@@ -9,5 +9,6 @@
     public SourceFolders? RSA { get; set; }
     public SourceFolders? GBR { get; set; }
     public SourceFolders? EXP { get; set; }
+    public SourceFolders? DEV { get; set; }
   }
 }

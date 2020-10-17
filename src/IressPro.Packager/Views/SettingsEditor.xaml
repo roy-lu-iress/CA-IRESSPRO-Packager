@@ -222,7 +222,7 @@
                 <Image Source="/Assets/33px-Flag_of_Singapore.png"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Tag="RSA" Header="_South Africa" ToolTip="South Africa office"  Click="onSetDefaults" >
+            <MenuItem Tag="RSA" Header="South _Africa" ToolTip="South Africa office"  Click="onSetDefaults" >
               <MenuItem.Icon>
                 <Image Source="/Assets/33px-Flag_of_South_Africa.webp"/>
               </MenuItem.Icon>
@@ -233,7 +233,12 @@
               </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Tag="exp" Header="E_xprerimental" ToolTip="E_xprerimental Kingdom office"  Click="onSetDefaults" >
+            <MenuItem Tag="exp" Header="E_xprerimental" ToolTip="Exprerimental Kingdom office"  Click="onSetDefaults" >
+              <MenuItem.Icon>
+                <Image Source="/Assets/33px-Flag_of_Canada.png"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Tag="DEV" Header="_Dev Support" ToolTip="Dev Support Kingdom office"  Click="onSetDefaults" >
               <MenuItem.Icon>
                 <Image Source="/Assets/33px-Flag_of_Canada.png"/>
               </MenuItem.Icon>
