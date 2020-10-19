@@ -98,7 +98,7 @@
             <Label     Grid.Row="4" Grid.Column="0" Content="_IOS+"                       Target="{Binding ElementName=tbxIosSrcFolder}" />
             <Label     Grid.Row="5" Grid.Column="0" Content="_Retail"                     Target="{Binding ElementName=tbxRtlSrcFolder}" />
             <Label     Grid.Row="6" Grid.Column="0" Content="_IPS"                        Target="{Binding ElementName=tbxIpsSrcFolder}" />
-            <Label     Grid.Row="7" Grid.Column="0" Content="_Registry"                   Target="{Binding ElementName=tbxAuxSrcFolder}" />
+            <Label     Grid.Row="7" Grid.Column="0" Content="_Registry"                   Target="{Binding ElementName=tbxRegSrcFolder}" />
             <Label     Grid.Row="8" Grid.Column="0" Content="S_elf-cont"                  Target="{Binding ElementName=tbxSlfSrcFolder}" />
 
             <TextBox   Grid.Row="0" Grid.Column="1" x:Name="tbxStagingRoot"   Text="C:\IressSetup\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
@@ -108,7 +108,7 @@
             <TextBox   Grid.Row="4" Grid.Column="1" x:Name="tbxIosSrcFolder" Text="Y:\Source Folder\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
             <TextBox   Grid.Row="5" Grid.Column="1" x:Name="tbxRtlSrcFolder" Text="Y:\Source Folder\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
             <TextBox   Grid.Row="6" Grid.Column="1" x:Name="tbxIpsSrcFolder" Text="Y:\Source Folder\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
-            <TextBox   Grid.Row="7" Grid.Column="1" x:Name="tbxAuxSrcFolder" Text="Y:\Source Folder\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
+            <TextBox   Grid.Row="7" Grid.Column="1" x:Name="tbxRegSrcFolder" Text="Y:\Source Folder\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
             <TextBox   Grid.Row="8" Grid.Column="1" x:Name="tbxSlfSrcFolder" Text="Y:\Source Folder\????????" TextChanged="onTextChanged" MouseDoubleClick="onCreateDir" BorderThickness="1" />
 
             <CheckBox  Grid.Row="0" Grid.Column="3" x:Name="cbxAutoOpenResults" Content="_Auto Open Results" />

@@ -31,7 +31,7 @@
     public string IosSrcFolder { get; set; } = @"Y:\Release Candidates\IOS Plus\Client\";
     public string RtlSrcFolder { get; set; } = @"Y:\Release Candidates\IOS Plus Retail\Client\Neo\";
     public string IpsSrcFolder { get; set; } = @"Y:\Release Candidates\Source\IPS\";
-    public string AuxSrcFolder { get; set; } = @"F:\Jagriti\Panther\Versions\Registries\";
+    public string RegSrcFolder { get; set; } = @"F:\Jagriti\Panther\Versions\Registries\";
     public string SlfSrcFolder { get; set; } = @"F:\Jagriti\Panther\Versions\Self Contained\";
 
     public string IrsPattern { get; set; } = @"IRESS - ??.*";
@@ -39,7 +39,7 @@
     public string RtlPattern { get; set; } = @"IOS Plus Retail - ??.*";
     public string IpsPattern { get; set; } = @"IPS - *";
     public string SlfPattern { get; set; } = @"*";
-    public string AuxPattern { get; set; } = @"*";
+    public string RegPattern { get; set; } = @"*";
 
     public string VersionDelimeter { get; set; } = @" - ";
     public bool DisconnectedMode { get; set; }

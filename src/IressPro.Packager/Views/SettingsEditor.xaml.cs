@@ -37,7 +37,7 @@ namespace IressPro.Packager.Views
       tbxIosSrcFolder.Text           /**/ = _appStg.IosSrcFolder;
       tbxRtlSrcFolder.Text           /**/ = _appStg.RtlSrcFolder;
       tbxIpsSrcFolder.Text           /**/ = _appStg.IpsSrcFolder;
-      tbxAuxSrcFolder.Text           /**/ = _appStg.AuxSrcFolder;
+      tbxRegSrcFolder.Text           /**/ = _appStg.RegSrcFolder;
       tbxSlfSrcFolder.Text           /**/ = _appStg.SlfSrcFolder;
     }
 
@@ -53,7 +53,7 @@ namespace IressPro.Packager.Views
       _appStg.IosSrcFolder           /**/ = tbxIosSrcFolder.Text                   /**/ ;
       _appStg.RtlSrcFolder           /**/ = tbxRtlSrcFolder.Text                   /**/ ;
       _appStg.IpsSrcFolder           /**/ = tbxIpsSrcFolder.Text                   /**/ ;
-      _appStg.AuxSrcFolder           /**/ = tbxAuxSrcFolder.Text                   /**/ ;
+      _appStg.RegSrcFolder           /**/ = tbxRegSrcFolder.Text                   /**/ ;
       _appStg.SlfSrcFolder           /**/ = tbxSlfSrcFolder.Text                   /**/ ;
 
       _appStg.Save();
@@ -102,7 +102,7 @@ namespace IressPro.Packager.Views
       tbxIosSrcFolder.Text = src?.IosSrcFolder;
       tbxRtlSrcFolder.Text = src?.RtlSrcFolder;
       tbxIpsSrcFolder.Text = src?.IpsSrcFolder;
-      tbxAuxSrcFolder.Text = src?.AuxSrcFolder;
+      tbxRegSrcFolder.Text = src?.RegSrcFolder;
       tbxSlfSrcFolder.Text = src?.SlfSrcFolder;
     }
   }

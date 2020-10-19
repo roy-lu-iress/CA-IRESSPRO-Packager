@@ -2,7 +2,7 @@
 {
   public class SourceFolders
   {
-    public string AuxSrcFolder { get; set; } = @"C:\CompiledBinaries\Registries\";
+    public string RegSrcFolder { get; set; } = @"C:\CompiledBinaries\Registries\";
     public string IosSrcFolder { get; set; } = @"C:\CompiledBinaries\IOS\";
     public string IpsSrcFolder { get; set; } = @"C:\CompiledBinaries\IPS\";
     public string IrsSrcFolder { get; set; } = @"C:\CompiledBinaries\IRESS\";
@@ -10,7 +10,7 @@
     public string SlfSrcFolder { get; set; } = @"C:\CompiledBinaries\SelfContained\";
 
     public override string ToString() =>
-      $"{AuxSrcFolder} \n" +
+      $"{RegSrcFolder} \n" +
       $"{IosSrcFolder} \n" +
       $"{IpsSrcFolder} \n" +
       $"{IrsSrcFolder} \n" +

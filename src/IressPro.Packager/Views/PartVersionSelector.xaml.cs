@@ -31,7 +31,7 @@ namespace IressPro.Packager
           Directory.Exists(_appStg.IosSrcFolder) &&
           Directory.Exists(_appStg.RtlSrcFolder) &&
           Directory.Exists(_appStg.IpsSrcFolder) &&
-          Directory.Exists(_appStg.AuxSrcFolder) &&
+          Directory.Exists(_appStg.RegSrcFolder) &&
           Directory.Exists(_appStg.SlfSrcFolder))); i--)
         {
           Trace.WriteLine($"{DateTimeOffset.Now:yy.MM.dd HH:mm:ss.f}  onShowSettings()");
@@ -43,7 +43,7 @@ namespace IressPro.Packager
         PackagerCoreBL.LoadListBox(lbx2, _appStg.IosSrcFolder, _appStg.IosPattern);
         PackagerCoreBL.LoadListBox(lbx3, _appStg.RtlSrcFolder, _appStg.RtlPattern);
         PackagerCoreBL.LoadListBox(lbx4, _appStg.IpsSrcFolder, _appStg.IpsPattern);
-        PackagerCoreBL.LoadListBox(lbx5, _appStg.AuxSrcFolder, _appStg.AuxPattern);
+        PackagerCoreBL.LoadListBox(lbx5, _appStg.RegSrcFolder, _appStg.RegPattern);
         PackagerCoreBL.LoadListBox(lbxZ, _appStg.SlfSrcFolder, _appStg.SlfPattern);
 
         chk1.IsChecked = _appStg.IsChecked1;
@@ -100,7 +100,7 @@ namespace IressPro.Packager
 
         if (chkZ.IsChecked == true)
         {
-          await _packager.CreateCibcPackage(CibSrcFolder, tbkPkgFilename.Text, _appStg.DisconnectedMode, _appStg.IsParallelExectn).ConfigureAwait(false);
+          await _packager.CreateSelfPackage(SlfSrcFolder, tbkPkgFilename.Text, _appStg.DisconnectedMode, _appStg.IsParallelExectn); // The calling thread cannot access this object because a different thread owns it.            .ConfigureAwait(false);
         }
         else
         {
@@ -110,7 +110,7 @@ namespace IressPro.Packager
               chk2.IsChecked != true ? null : IosSrcFolder,
               chk3.IsChecked != true ? null : RtlSrcFolder,
               chk4.IsChecked != true ? null : IpsSrcFolder,
-              chk5.IsChecked != true ? null : CibSrcFolder},
+              chk5.IsChecked != true ? null : RegSrcFolder},
             tbkPkgFilename.Text, _appStg.DisconnectedMode, _appStg.IsParallelExectn); // thread access violation for root.Enbled: .ConfigureAwait(false); 
         }
 
@@ -146,8 +146,8 @@ namespace IressPro.Packager
         var a2 = chk2.IsChecked != true ? "" : $"IOS{lbx2?.SelectedItem}-";
         var a3 = chk3.IsChecked != true ? "" : $"Retail{lbx3?.SelectedItem}-";
         var a4 = chk4.IsChecked != true ? "" : $"IPS{lbx4?.SelectedItem}-";
-        var a5 = chk5.IsChecked != true ? "" : $"Aux{lbx5?.SelectedItem}";
-        var aZ = chk5.IsChecked != true ? "" : $"{lbxZ?.SelectedItem}";
+        var a5 = chk5.IsChecked != true ? "" : $"Regist{lbx5?.SelectedItem}";
+        var aZ = chkZ.IsChecked != true ? "" : $"{lbxZ?.SelectedItem}";
 
 #if !BEFORE_Jan15
         tbkPkgFilename.Text = (chkZ.IsChecked == true ? $"{aZ}".Trim(new[] { '-' }) : $"{a1}{a2}{a3}{a4}{a5}".Trim(new[] { '-' })).Replace(" ", "_", StringComparison.Ordinal).Replace(".", "_", StringComparison.Ordinal) + ".exe";
@@ -160,8 +160,8 @@ namespace IressPro.Packager
         if (chk2.IsChecked == true && lbx2?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IosSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{IosSrcFolder}' \n"; }
         if (chk3.IsChecked == true && lbx3?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(RtlSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{RtlSrcFolder}' \n"; }
         if (chk4.IsChecked == true && lbx4?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(IpsSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{IpsSrcFolder}' \n"; }
-        if (chk5.IsChecked == true && lbx5?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(CibSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{CibSrcFolder}' \n"; }
-        if (chkZ.IsChecked == true && lbxZ?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(CibSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{CibSrcFolder}' \n"; }
+        if (chk5.IsChecked == true && lbx5?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(RegSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{RegSrcFolder}' \n"; }
+        if (chkZ.IsChecked == true && lbxZ?.SelectedIndex >= 0) { if (!File.Exists(Path.Combine(SlfSrcFolder, installer))) tbkInfo.Text += $"Warning: No  '{installer}'  in  '{SlfSrcFolder}' \n"; }
 
         btnCreatePkg.IsEnabled = (lbx1?.SelectedIndex >= 0 && lbx2?.SelectedIndex >= 0) || lbxZ?.SelectedIndex >= 0;
 
@@ -177,8 +177,8 @@ namespace IressPro.Packager
     string IosSrcFolder => Path.Combine(_appStg.IosSrcFolder, $"{_appStg.IosPattern.Substring(0, 11)}{lbx2.SelectedItem}");
     string RtlSrcFolder => Path.Combine(_appStg.RtlSrcFolder, $"{_appStg.RtlPattern.Substring(0, 18)}{lbx3.SelectedItem}");
     string IpsSrcFolder => Path.Combine(_appStg.IpsSrcFolder, $"{_appStg.IpsPattern.Substring(0, 06)}{lbx4.SelectedItem}");
-    string CibSrcFolder => Path.Combine(_appStg.AuxSrcFolder, $"{_appStg.AuxPattern.Substring(0, 00)}{lbx5.SelectedItem}");
-    string SpcSrcFolder => Path.Combine(_appStg.SlfSrcFolder, $"{_appStg.SlfPattern.Substring(0, 00)}{lbxZ.SelectedItem}");
+    string RegSrcFolder => Path.Combine(_appStg.RegSrcFolder, $"{_appStg.RegPattern.Substring(0, 00)}{lbx5.SelectedItem}");
+    string SlfSrcFolder => Path.Combine(_appStg.SlfSrcFolder, $"{_appStg.SlfPattern.Substring(0, 00)}{lbxZ.SelectedItem}");
 
     public string PkgFilenameExe => tbkPkgFilename.Text;
 

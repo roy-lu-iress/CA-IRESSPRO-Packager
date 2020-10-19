@@ -64,15 +64,15 @@ namespace IressPro.Packager.IO
       }
       catch (Exception ex) { ex.Pop($"\n\n{pkgFilenameExe}     \n"); }
     }
-    public async Task CreateCibcPackage(string sourceFolder, string pkgFilenameExe, bool autoOpen, bool autoCopyToYDrive)
+    public async Task CreateSelfPackage(string sourceFolder, string pkgFilenameExe, bool autoOpen, bool autoCopyToYDrive)
     {
       try
       {
         theSetup(pkgFilenameExe, out var folderEndings, out var stgDir, out var sfxDir);
 
-        await copyCibcToStaging(sourceFolder, stgDir, folderEndings).ConfigureAwait(false);
+        await copySelfToStaging(sourceFolder, stgDir, folderEndings).ConfigureAwait(false);
 
-        await generateAutoRunBatFileCIBC(Path.Combine(stgDir, _appStg.AutoRunFilename)).ConfigureAwait(false);
+        await generateAutoRunBatFileSelf(Path.Combine(stgDir, _appStg.AutoRunFilename)).ConfigureAwait(false);
 
         await compress(pkgFilenameExe, autoOpen, autoCopyToYDrive, folderEndings, stgDir, sfxDir).ConfigureAwait(false);
       }
@@ -148,13 +148,12 @@ namespace IressPro.Packager.IO
       switch (i)
       {
         case 4:
-        case 5:
-          return "*.*"; // for extra files to pack into the target root from the Aux and SelfContained listbox folder.
+        case 5: return "*.*"; // for extra files to pack into the target root from the Reg and SelfContained listbox folder.
         default: return "setu?.exe";
       }
     }
 
-    async Task copyCibcToStaging(string sourceFolder, string targetStgDir, char[] folderEndings)
+    async Task copySelfToStaging(string sourceFolder, string targetStgDir, char[] folderEndings)
     {
       var args = $"\"{sourceFolder.Trim(folderEndings)}\" \"{targetStgDir.Trim(folderEndings)}\"  /XO /NJH /NJS";
 
@@ -170,7 +169,7 @@ namespace IressPro.Packager.IO
 
       await File.WriteAllTextAsync(autorunPathFileExt, autorunContent).ConfigureAwait(false);
     }
-    async Task generateAutoRunBatFileCIBC(string autorunPathFileExt) => await File.WriteAllTextAsync(autorunPathFileExt, AppStg.BatCtx_CIBC).ConfigureAwait(false);
+    async Task generateAutoRunBatFileSelf(string autorunPathFileExt) => await File.WriteAllTextAsync(autorunPathFileExt, AppStg.BatCtx_CIBC).ConfigureAwait(false);
 
     void tryFindWinRar()
     {
