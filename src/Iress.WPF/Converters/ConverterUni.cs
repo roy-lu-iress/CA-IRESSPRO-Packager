@@ -26,9 +26,9 @@ namespace Iress.WPF.Converters
       {
         return v < 75 ? _b0 : v < 80 ? _b1 : v < 85 ? _b2 : v < 90 ? _b3 : v < 100 ? _b4 : _b5;
       }
-      else if (value is string)
+      else if (value is string val)
       {
-        switch (((string)value))
+        switch (val)
         {
           case "offline":
             if (targetType == typeof(Brush)) return Brushes.White;
@@ -64,27 +64,27 @@ namespace Iress.WPF.Converters
           case "quit":
           case "terminate": return Brushes.Black;
           default:
-            if (targetType == typeof(Visibility)) return (string.IsNullOrEmpty((string)value) && IsInverted) ? Visibility.Visible : Visibility.Collapsed;
+            if (targetType == typeof(Visibility)) return (string.IsNullOrEmpty(val) && IsInverted) ? Visibility.Visible : Visibility.Collapsed;
             else if (targetType == typeof(Brush)) return Brushes.Gray;
             else return Brushes.Gray;
         }
       }
-      else if (value is bool)
+      else if (value is bool booleanValue)
       {
-        if (targetType == typeof(bool)) return (bool)value ? true : false;
+        if (targetType == typeof(bool)) return booleanValue;
         else if (targetType == typeof(Brush))
-          return (bool)value ? new LinearGradientBrush(Colors.Green, Colors.LightGreen, 0) : new LinearGradientBrush(Colors.DarkRed, Colors.Red, 0);//new BrushConverter().ConvertFromString("#00ff00");
+          return booleanValue ? new LinearGradientBrush(Colors.Green, Colors.LightGreen, 0) : new LinearGradientBrush(Colors.DarkRed, Colors.Red, 0);//new BrushConverter().ConvertFromString("#00ff00");
         else if (targetType == typeof(Visibility))
-          return (bool)value ? (IsInverted ? Visibility.Collapsed : Visibility.Visible) : (IsInverted ? Visibility.Visible : Visibility.Collapsed);
+          return booleanValue ? (IsInverted ? Visibility.Collapsed : Visibility.Visible) : (IsInverted ? Visibility.Visible : Visibility.Collapsed);
         else if (targetType == typeof(FontWeight))
-          return (bool)value ? (IsInverted ? FontWeights.Normal : FontWeights.Bold) : (IsInverted ? FontWeights.Bold : FontWeights.Normal);
+          return booleanValue ? (IsInverted ? FontWeights.Normal : FontWeights.Bold) : (IsInverted ? FontWeights.Bold : FontWeights.Normal);
         else return null;
       }
-      else if (value is DateTimeOffset)
+      else if (value is DateTimeOffset offset)
       {
         //if (targetType == typeof(DateTimeOffset))
         {
-          var va = (DateTimeOffset)value;
+          var va = offset;
           var dt = DateTimeOffset.Now - va;
           return
             dt.TotalSeconds < 10 ? $"Now!!!" :

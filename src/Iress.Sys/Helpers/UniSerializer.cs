@@ -27,14 +27,10 @@ namespace Iress.Sys.Helpers
       {
         var isoStore = IsolatedStorageFile.GetStore(iss, null, null);
 
-        using (var isoStream = new IsolatedStorageFileStream(IsoHelper.GetSetFilename<T>(filenameONLY, "json"), FileMode.Create, isoStore))
-        {
-          using (var streamWriter = new StreamWriter(isoStream))
-          {
-            new DataContractJsonSerializer(typeof(T)).WriteObject(streamWriter.BaseStream, o); // new XmlSerializer(o.GetType()).Serialize(streamWriter, o);
-            streamWriter.Close();
-          }
-        }
+        using var isoStream = new IsolatedStorageFileStream(IsoHelper.GetSetFilename<T>(filenameONLY, "json"), FileMode.Create, isoStore);
+        using var streamWriter = new StreamWriter(isoStream);
+        new DataContractJsonSerializer(typeof(T)).WriteObject(streamWriter.BaseStream, o); // new XmlSerializer(o.GetType()).Serialize(streamWriter, o);
+        streamWriter.Close();
       }
       catch (Exception ex) { ex.Log(); throw; }
     }
@@ -48,12 +44,10 @@ namespace Iress.Sys.Helpers
         if (isoStore.FileExists(IsoHelper.GetSetFilename<T>(filenameONLY, "json")))
           using (var isoStream = new IsolatedStorageFileStream(IsoHelper.GetSetFilename<T>(filenameONLY, "json"), FileMode.Open, FileAccess.Read, FileShare.Read, isoStore))
           {
-            using (var streamReader = new StreamReader(isoStream))
-            {
-              var o = (T)(new DataContractJsonSerializer(typeof(T)).ReadObject(streamReader.BaseStream)); // var o = (T)(new XmlSerializer(typeof(T)).Deserialize(streamReader));
-              streamReader.Close();
-              return o;
-            }
+            using var streamReader = new StreamReader(isoStream);
+            var o = (T)(new DataContractJsonSerializer(typeof(T)).ReadObject(streamReader.BaseStream)); // var o = (T)(new XmlSerializer(typeof(T)).Deserialize(streamReader));
+            streamReader.Close();
+            return o;
           }
       }
       catch (InvalidOperationException /**/ ex) { if (ex.HResult != -2146233079) { ex.Log(); throw; } }  // "Root element is missing." ==> create new at the bottom
@@ -71,16 +65,12 @@ namespace Iress.Sys.Helpers
       {
         var isoStore = IsolatedStorageFile.GetStore(iss, null, null);
 
-        using (var isoStream = new IsolatedStorageFileStream(IsoHelper.GetSetFilename<T>(filenameONLY, "xml"), FileMode.Create, isoStore))
-        {
-          //IsoHelper.DevDbgLookup(isoStore, isoStream);
+        using var isoStream = new IsolatedStorageFileStream(IsoHelper.GetSetFilename<T>(filenameONLY, "xml"), FileMode.Create, isoStore);
+        //IsoHelper.DevDbgLookup(isoStore, isoStream);
 
-          using (var streamWriter = new StreamWriter(isoStream))
-          {
-            new XmlSerializer(o?.GetType()).Serialize(streamWriter, o);
-            streamWriter.Close();
-          }
-        }
+        using var streamWriter = new StreamWriter(isoStream);
+        new XmlSerializer(o?.GetType()).Serialize(streamWriter, o);
+        streamWriter.Close();
       }
       catch (Exception ex) { ex.Log(); throw; }
     }
@@ -95,12 +85,10 @@ namespace Iress.Sys.Helpers
         if (isoStore.FileExists(IsoHelper.GetSetFilename<T>(filenameONLY, "xml")))
           using (var stream = new IsolatedStorageFileStream(IsoHelper.GetSetFilename<T>(filenameONLY, "xml"), FileMode.Open, FileAccess.Read, FileShare.Read, isoStore))
           {
-            using (var streamReader = XmlReader.Create(stream))//ing (var streamReader = new StreamReader(stream))
-            {
-              var o = (T)(new XmlSerializer(typeof(T)).Deserialize(streamReader));
-              streamReader.Close();
-              return o;
-            }
+            using var streamReader = XmlReader.Create(stream);
+            var o = (T)(new XmlSerializer(typeof(T)).Deserialize(streamReader));
+            streamReader.Close();
+            return o;
           }
       }
       catch (InvalidOperationException ex) { if (ex.HResult != -2146233079) ex.Log(); throw; } // "Root element is missing." ==> create new at the bottom
