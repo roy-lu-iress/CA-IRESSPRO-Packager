@@ -2,7 +2,7 @@
         xmlns:local="clr-namespace:Iress.WPF.View"
         Title="ExceptionPopup" Height="400" Width="700"
         WindowStartupLocation="CenterScreen"
-        Style="{DynamicResource WindowStyle_Aav0}">
+        Style="{DynamicResource WindowStyle_Aav0}" Loaded="wnd_Loaded">
   <lnk:WindowBase.Resources>
     <ResourceDictionary >
       <ResourceDictionary.MergedDictionaries>
@@ -45,6 +45,7 @@
 
       <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="#d01" FontSize="26" VerticalAlignment="Top"    Text="Exception ORG!!!" Margin="0 0 0 20"  x:Name="ExType"                />
       <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="#090" FontSize="14" VerticalAlignment="Bottom" Text="Press any key to continue, or any other key to quit" />
+      <TextBlock Grid.Row="0" HorizontalAlignment="Right"  Foreground="#009" FontSize="10" VerticalAlignment="Center" Text="Will Ignore in 3 min automatically...  " />
 
 
       <Label Grid.Row="1" Content="src file:" />
@@ -60,7 +61,7 @@
       <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" >
         <Button Content="_Abort"  IsDefault="False"   Click="onShutdown"  Foreground="#06f" FontSize="16" Margin="5" ToolTip="Shutdown the application"/>
         <Button Content="_Ignore" IsDefault="True"    Click="onCopyClose" Foreground="#0b0" FontSize="16" Margin="5" ToolTip="Copy to clipboard and close to continue"/>
-        <Button Content="  X  "    IsCancel="True"    Click="onClose"     Foreground="#c00" FontSize="16" Margin="5" ToolTip="Close" FontWeight="Bold" />
+        <Button Content="  X  "    IsCancel="True"    Click="onCloseAndContinueExecution"     Foreground="#c00" FontSize="16" Margin="5" ToolTip="Close" FontWeight="Bold" />
       </StackPanel>
 
       <Image Height="60" Width="60" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left"  Source="/Iress.WPF;component/Assets/error.gif" />
