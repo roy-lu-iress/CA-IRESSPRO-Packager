@@ -2,7 +2,7 @@
         xmlns:local="clr-namespace:Iress.WPF.View"
         Title="ExceptionPopup" Height="400" Width="700"
         WindowStartupLocation="CenterScreen"
-        Style="{DynamicResource WindowStyle_Aav0}" Loaded="wnd_Loaded">
+        Style="{DynamicResource WindowStyle_Aav0}" Loaded="onLoaded">
   <lnk:WindowBase.Resources>
     <ResourceDictionary >
       <ResourceDictionary.MergedDictionaries>
@@ -22,10 +22,10 @@
     <Grid Margin="5 0 5 0">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"  />
-        <RowDefinition Height="1*"    />
-        <RowDefinition Height="1*"    />
         <RowDefinition Height="3*"    />
-        <RowDefinition Height="2*"    />
+        <RowDefinition Height="1*"    />
+        <RowDefinition Height="1*"    />
+        <RowDefinition Height="Auto"    />
         <RowDefinition Height="20"  />
       </Grid.RowDefinitions>
       <Grid.Resources>
@@ -52,9 +52,9 @@
       <Label Grid.Row="2" Content="function:" />
       <Label Grid.Row="3" Content="exception:" />
 
-      <TextBlock Grid.Row="1" Style="{StaticResource tb}" x:Name="callerFL" Text="C:\c\folder\file.cs: 12" />
-      <TextBlock Grid.Row="2" Style="{StaticResource tb}" x:Name="methodNm" Text="MethodName()" />
-      <TextBlock Grid.Row="3" Style="{StaticResource tb}" x:Name="innrMsgs" Text="Exception message" MouseDown="T4_MouseDown" ToolTip="Click to copy to clipboard." TextWrapping="Wrap" />
+      <TextBlock Grid.Row="1" Style="{StaticResource tb}" x:Name="innrMsgs" Text="Exception message" MouseDown="T4_MouseDown" ToolTip="Click to copy to clipboard." TextWrapping="Wrap" />
+      <TextBlock Grid.Row="2" Style="{StaticResource tb}" x:Name="callerFL" Text="C:\c\folder\file.cs: 12" />
+      <TextBlock Grid.Row="3" Style="{StaticResource tb}" x:Name="methodNm" Text="MethodName()" />
       <TextBlock Grid.Row="4" Style="{StaticResource tb}" x:Name="optnlMsg" Text="[optnl text]" Foreground="#ee0" />
 
 
