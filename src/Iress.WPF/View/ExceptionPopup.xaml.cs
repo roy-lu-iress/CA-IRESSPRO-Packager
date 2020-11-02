@@ -20,11 +20,11 @@ namespace Iress.WPF.View
         innrMsgs.Text = $"{ex.InnerMessages()}";
       };
     }
+
     async void onLoaded(object s, RoutedEventArgs e) { await Task.Delay(180000); onCloseAndContinueExecution(s, e); }
-    void onCloseAndContinueExecution(object s, RoutedEventArgs e) => Close(); // close popup and continue app execution
     void onShutdown(object s, RoutedEventArgs e) => Application.Current.Shutdown();
     void T4_MouseDown(object s, System.Windows.Input.MouseButtonEventArgs e) => onCopyClose(s, e);
     void onCopyClose(object s, RoutedEventArgs e) { Clipboard.SetText($"{callerFL.Text}\r\n{methodNm.Text}\r\n{optnlMsg.Text}\r\n{innrMsgs.Text}"); onCloseAndContinueExecution(s, e); }
-
+    void onCloseAndContinueExecution(object s, RoutedEventArgs e) => Close(); // close popup and continue app execution
   }
 }
