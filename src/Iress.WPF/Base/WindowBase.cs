@@ -1,7 +1,4 @@
-﻿#if MockingCore3
-#else
-using Microsoft.Extensions.Logging;
-#endif
+﻿using Microsoft.Extensions.Logging;
 using Iress.Sys.Ext;
 using Iress.Sys.Helpers;
 using Iress.WPF.Ext;
@@ -26,39 +23,16 @@ namespace Iress.WPF.Base
     protected bool IgnoreWindowPlacement { get; set; } = false;
     string _isoFilenameONLY => $"{GetType().Name}.xml";
 
-#if MockingCore3
-    class Logger
-    {
-      internal void LogError(Exception ex, string v) { Trace.WriteLine($"{ex}  {v}"); }
-    }
-    Logger _logger;
-    public WindowBase()
-    {
-#else
     readonly ILogger<WindowBase> _logger;
     public WindowBase() : this(new LoggerFactory().CreateLogger<WindowBase>()) { }
     public WindowBase(ILogger<WindowBase> logger)
     {
       _logger = logger;
-#endif
 
-      //todo: use the commented out code below!!!   //mar18: looks like Core 3 is fixed for this bug.
       MouseLeftButtonDown += (s, e) => DragMove();  //jan23: using bad code to catch/recreate/replace it with the commented section below .. no luck yet, at least on Core 3.1 (Mar2020)
-      //MouseLeftButtonDown += (s, e) => { try { DragMove(); } catch (Exception ex) { ex.Log(); throw; } };
-      //MouseLeftButtonDown += (s, e) => //tu: workaround for  "Can only call DragMove when primary mouse button is down."
-      //{
-      //  base.OnMouseLeftButtonDown(e);                 // either one of these line solves the issue
-      //  if (e.LeftButton == MouseButtonState.Pressed)  // either one of these line solves the issue
-      //    DragMove();           //Window.GetWindow(this).DragMove();
 
-      //  //e.Handled = true; 
-      //};
-
-
-      //useDoubleClick += (s, e) => WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal; <= too obnoxious (Jan2020)
       MouseWheel += (s, e) => { if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))) return; ZV += (e.Delta * .001); e.Handled = true; Debug.WriteLine(Title = $">>ZV:{ZV}"); }; //tu:
 
-      //Loaded += (s, e) => { applyTheme(Thm); };
       KeyUp += (s, e) =>
       {
         if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
@@ -83,38 +57,28 @@ namespace Iress.WPF.Base
     public static readonly DependencyProperty ZVProperty = DependencyProperty.Register("ZV", typeof(double), typeof(WindowBase), new PropertyMetadata(_defaultZoomV)); public double ZV { get => (double)GetValue(ZVProperty); set => SetValue(ZVProperty, value); }
     public static readonly DependencyProperty ThmProperty = DependencyProperty.Register("Thm", typeof(string), typeof(WindowBase), new PropertyMetadata(_defaultTheme)); public string Thm { get => (string)GetValue(ThmProperty); set => SetValue(ThmProperty, value); }
 
-    protected void ApplyTheme(string themeName)
+    protected void ApplyTheme(string themeShade)
     {
-      const string pref = "/Iress.WPF;component/ColorScheme/Theme.Color.";
+      const string prefix = "/Iress.WPF;component/ColorScheme/Theme.Color.";
 
       try
       {
-        if (_defaultTheme.Equals(themeName, StringComparison.Ordinal) || Thm.Equals(themeName, StringComparison.Ordinal))
+        if (_defaultTheme.Equals(themeShade, StringComparison.Ordinal) || Thm.Equals(themeShade, StringComparison.Ordinal))
         {
           return;
         }
 
-        //~Trace.Write($"    ~> ApplyTheme()   '{themeName}'  to  '{_isoFilenameONLY}' ... Dicts --/++:\r\n");
-        //~Application.Current.Resources.MergedDictionaries.ToList().ForEach(r => Trace.WriteLine($"    ~> -- Removing: {((System.Windows.Markup.IUriContext)r)?.BaseUri?.AbsolutePath.Replace(pref, "..."/*, StringComparison.OrdinalIgnoreCase*/)}"));
-
-        var suri = $"{pref}{themeName}.xaml";
+        var suri = $"{prefix}{themeShade}.xaml";
         if (Application.LoadComponent(new Uri(suri, UriKind.RelativeOrAbsolute)) is ResourceDictionary dict)
         {
           ResourceDictionary rd;
-          while ((rd = Application.Current.Resources.MergedDictionaries.FirstOrDefault(r => ((System.Windows.Markup.IUriContext)r)?.BaseUri?.AbsolutePath?.Contains(pref
-#if Net4
-#else
-            , StringComparison.OrdinalIgnoreCase
-#endif
-            ) == true)) != null)
+          while ((rd = Application.Current.Resources.MergedDictionaries.First(r => ((System.Windows.Markup.IUriContext)r)?.BaseUri?.AbsolutePath?.Contains(prefix, StringComparison.OrdinalIgnoreCase) == true)) != null)
             Application.Current.Resources.MergedDictionaries.Remove(rd);
 
           Application.Current.Resources.MergedDictionaries.Add(dict);
         }
-        Thm = themeName;
-
-        //~Application.Current.Resources.MergedDictionaries.ToList().ForEach(r => Trace.WriteLine($"    ~> ++ Adding:   {((System.Windows.Markup.IUriContext)r)?.BaseUri?.AbsolutePath.Replace(pref, "..."/*, StringComparison.OrdinalIgnoreCase*/)}"));
-        //~Trace.Write($"    ~> ApplyTheme()   '{themeName}'  to  '{_isoFilenameONLY}' is done. \r\n");
+       
+        Thm = themeShade;
       }
       catch (Exception ex) { _logger.LogError(ex, $""); ex.Pop(); throw; }
     }
@@ -168,7 +132,7 @@ namespace Iress.WPF.Base
           Trace.WriteLine($"Window Positions  {_isoFilenameONLY}  not all zeros! {SystemParameters.WorkArea.Width}x{SystemParameters.WorkArea.Height} is this the screen dims? Jun2020 {winPlcmnt.normalPosition.Bottom}|{winPlcmnt.normalPosition.Top}x{winPlcmnt.normalPosition.Left}-{winPlcmnt.normalPosition.Right}");
 
 
-        NativeMethods.SetWindowPlacement(new WindowInteropHelper(this).Handle, ref winPlcmnt); //Note: if window was closed on a monitor that is now disconnected from the computer, SetWindowPlacement will place the window onto a visible monitor.
+        NativeMethods.SetWindowPlacement_(new WindowInteropHelper(this).Handle, ref winPlcmnt); //Note: if window was closed on a monitor that is now disconnected from the computer, SetWindowPlacement will place the window onto a visible monitor.
       }
       catch (InvalidOperationException ex) { ex.Log(); }
       catch (Exception ex) { ex.Log(); throw; }
@@ -177,7 +141,7 @@ namespace Iress.WPF.Base
     {
       base.OnClosing(e);
 
-      NativeMethods.GetWindowPlacement(new WindowInteropHelper(this).Handle, out var wp);
+      NativeMethods.GetWindowPlacement_(new WindowInteropHelper(this).Handle, out var wp);
       XmlIsoFileSerializer.Save(new NativeMethods.WPContainer { WindowPlacement = wp, Zb = ZV, Thm = Thm }, _isoFilenameONLY);
     }
   }

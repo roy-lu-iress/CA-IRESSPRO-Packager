@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -20,8 +21,11 @@ namespace Iress.Sys.Helpers
 
 
     #region Win32 API declarations to set and get window placement
-    [DllImport("user32.dll")] public static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
-    [DllImport("user32.dll")] public static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
+    public static bool SetWindowPlacement_(IntPtr hWnd, [In] ref WindowPlacement lpwndpl) => SetWindowPlacement(hWnd, ref lpwndpl);
+    public static bool GetWindowPlacement_(IntPtr hWnd, out WindowPlacement lpwndpl) => GetWindowPlacement(hWnd, out lpwndpl);
+    
+    [DllImport("user32.dll")] static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
+    [DllImport("user32.dll")] static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
@@ -33,6 +37,12 @@ namespace Iress.Sys.Helpers
       public Point minPosition;
       public Point maxPosition;
       public Rect normalPosition;
+
+      public override bool Equals(object? obj) => obj is WindowPlacement placement && length == placement.length && flags == placement.flags && showCmd == placement.showCmd && EqualityComparer<Point>.Default.Equals(minPosition, placement.minPosition) && EqualityComparer<Point>.Default.Equals(maxPosition, placement.maxPosition) && EqualityComparer<Rect>.Default.Equals(normalPosition, placement.normalPosition);
+
+      public static bool operator ==(WindowPlacement left, WindowPlacement right) => left.Equals(right);
+
+      public static bool operator !=(WindowPlacement left, WindowPlacement right) => !(left == right);
     }
 
     [Serializable]
@@ -46,7 +56,7 @@ namespace Iress.Sys.Helpers
     [StructLayout(LayoutKind.Sequential)]
     public struct Rect
     {
-      public int Left, Top, Right, Bottom; 
+      public int Left, Top, Right, Bottom;
       internal Rect(int left, int top, int right, int bottom) { Left = left; Top = top; Right = right; Bottom = bottom; }
     } // RECT structure required by WINDOWPLACEMENT structure
 

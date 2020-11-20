@@ -12,12 +12,11 @@ namespace Iress.Sys.Helpers
 
     static string getTimedVerString()
     {
-      var calng = new FileInfo(Assembly.GetCallingAssembly().Location).LastWriteTime;      // from .NET 4.8 version
-      var entry = new FileInfo(Assembly.GetEntryAssembly()?.Location).LastWriteTime;
-      var execg = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
-      var max = entry > execg ? entry : execg;
-
-      return TimeAgo(max);
+      var ea = Assembly.GetEntryAssembly();
+      return TimeAgo(DateTime.FromOADate(Math.Max(Math.Max(
+        new FileInfo(Assembly.GetCallingAssembly().Location).LastWriteTime.ToOADate(),
+        (ea is null ? DateTime.MinValue : new FileInfo(ea?.Location).LastWriteTime).ToOADate()),
+        new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime.ToOADate())));
     }
 
     public static string TimeAgo(DateTimeOffset max, bool versionMode = false)
