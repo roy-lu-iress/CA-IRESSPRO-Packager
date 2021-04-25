@@ -145,7 +145,9 @@ cd ..
 :RetailInstall
 echo Installing IOS Plus Retail Client Plugin...
 cd ""%DFS_IRESSRETAILPACKAGE_DIR%""
-Setup.exe /S /V/qb+
+rem Setup.exe /S /V/qb+   Replaces with below as per CI-299
+Setup.exe /qb
+
 cd ..
 
 goto end

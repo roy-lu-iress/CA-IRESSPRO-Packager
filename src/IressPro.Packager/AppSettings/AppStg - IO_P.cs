@@ -145,7 +145,9 @@ cd ..
 :IPSInstall
 echo Installing IPS Client Plugin...
 cd ""%DFS_IPSPACKAGE_DIR%""
-Setup.exe /S /V/qb+
+rem Setup.exe /S /V/qb+   Replaces with below as per CI-299
+Setup.exe /qb
+
 cd ..
 
 goto end

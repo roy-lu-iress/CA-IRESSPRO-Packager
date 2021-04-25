@@ -139,7 +139,9 @@ del ""%DFS_APPDIR%\FLD32CMD.FMT""
 
 :CanadaPackageInstall
 cd ""%DFS_IRESSCANADAPACKAGE_DIR%""
-Setup.exe /S /V/qb+
+rem Setup.exe /S /V/qb+   Replaces with below as per CI-299
+Setup.exe /qb
+
 cd ..
 
 goto end
