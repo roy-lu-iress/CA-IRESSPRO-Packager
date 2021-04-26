@@ -18,20 +18,27 @@ namespace IressPro.Packager
     {
       base.OnStartup(e);
 
+      const string suffix = "Pkg.";
+
 #if LogErrors
-      var logFolder = @"Logs";
+      var logFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\{suffix}Logs";
       if (!Directory.Exists(logFolder))
         Directory.CreateDirectory(logFolder);
 
       Trace.Listeners.Add(new TextWriterTraceListener(@$"{logFolder}\ErrorLog.{DateTime.Now:yyyy-MM-dd.HHmm}.txt"));
 #endif
+
       Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
       EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler((s, re) => { (s as TextBox)?.SelectAll(); }));
 
       var builder = new ConfigurationBuilder();
-      builder.SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true, reloadOnChange: true)
+      builder
+        .SetBasePath(AppContext.BaseDirectory)
+      //.SetBasePath(Directory.GetCurrentDirectory()) //nogo: lands in ~C:\Windows\SystemWOW\...
+      //.AddJsonFile($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\appsettings.{suffix}json", optional: false, reloadOnChange: true)
+      //.AddJsonFile($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\appsettings.{suffix}{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{suffix}json", optional: false, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{suffix}{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true, reloadOnChange: true)
         .AddEnvironmentVariables();
 
       var cfg = builder.Build();

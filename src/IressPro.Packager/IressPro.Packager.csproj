@@ -74,7 +74,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="appsettings.json">
+    <None Update="appsettings.Pkg.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
