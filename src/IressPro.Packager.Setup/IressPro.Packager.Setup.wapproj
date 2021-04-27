@@ -64,7 +64,7 @@
     <PackageCertificateThumbprint>24EA1D591E736CDDF327D4A617551408DBF447AA</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxPackageDir>C:\oneiress\iresspro-packager\src\IressPro.Packager.Setup\AppPackages\</AppxPackageDir>
-    <AppInstallerUri>https://automatic-garbanzo-92c0eead.pages.github.io/</AppInstallerUri>
+    <AppInstallerUri>C:\oneiress\iresspro-packager-installer\</AppInstallerUri>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AppxBundle>Always</AppxBundle>
