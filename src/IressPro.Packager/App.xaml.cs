@@ -31,6 +31,7 @@ namespace IressPro.Packager
       Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
       EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler((s, re) => { (s as TextBox)?.SelectAll(); }));
 
+#if false
       var builder = new ConfigurationBuilder();
       builder
         .SetBasePath(AppContext.BaseDirectory)
@@ -42,6 +43,9 @@ namespace IressPro.Packager
         .AddEnvironmentVariables();
 
       var cfg = builder.Build();
+#else
+      var cfg = ConfigHelper.InitConfig(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), $"appsettings.{suffix}json"), ConstDefaults._fallback);
+#endif
       var defaults = cfg.GetSection("Defaults").Get<Defaults>();
 
 #if AltLoggerIsUp
@@ -58,5 +62,6 @@ namespace IressPro.Packager
     }
 
     protected override void OnExit(ExitEventArgs e) => Trace.WriteLine($"{DateTimeOffset.Now:yy.MM.dd HH:mm:ss.f} +{(DateTimeOffset.Now - Started):mm\\:ss\\.ff}    OnExit  ().");
+   
   }
 }
