@@ -9,7 +9,7 @@
   <Identity
     Name="63354AlexPigida.IressProPackager"
     Publisher="CN=AlexPi"
-    Version="21.4.15.0" />
+    Version="21.4.16.0" />
 
   <Properties>
     <DisplayName>IressProPackager</DisplayName>
